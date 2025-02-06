@@ -45,10 +45,6 @@ public class PurchaseService {
 
     private Specification<Purchase> customerEmailEquals(String customerEmail) {
 
-        if (customerEmail == null) {
-            return Specification.where(null);
-        }
-
         return (root, query, builder) -> {
             Join<Purchase, Customer> join = root.join("customer", JoinType.INNER);
             return builder.equal(join.get("email"), customerEmail);
@@ -57,13 +53,16 @@ public class PurchaseService {
     }
 
     private Specification<Purchase> productCodeEquals(String productCode) {
+
         return (root, query, builder) -> {
             Join<Purchase, Product> join = root.join("product", JoinType.INNER);
             return builder.equal(join.get("code"), productCode);
         };
+
     }
 
     private Specification<Purchase> productPrinceBetween(Double productMinPrice, Double productMaxPrice) {
+
         return (root, query, builder) -> {
             Join<Purchase, Product> join = root.join("product", JoinType.INNER);
             Expression<Double> price = join.get("price");
@@ -72,6 +71,7 @@ public class PurchaseService {
                     builder.coalesce(builder.literal(productMinPrice), price),
                     builder.coalesce(builder.literal(productMaxPrice), price));
         };
+
     }
 
 }
