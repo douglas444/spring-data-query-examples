@@ -1,6 +1,6 @@
 INSERT INTO customer (id, active, email) VALUES (1, true, 'joao@test.com');
 INSERT INTO customer (id, active, email) VALUES (2, true, 'maria@test.com');
-INSERT INTO customer (id, active, email) VALUES (3, false, 'maria@test.com');
+INSERT INTO customer (id, active, email) VALUES (3, false, 'carlos@test.com');
 
 INSERT INTO product (id, code, price) VALUES (10, 'NINTENDO-SWITCH', 1899.0);
 INSERT INTO product (id, code, price) VALUES (20, 'PS5', 3299.0);
