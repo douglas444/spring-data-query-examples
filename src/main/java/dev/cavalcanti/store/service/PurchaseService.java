@@ -29,11 +29,12 @@ public class PurchaseService {
         Specification<Purchase> specification = Specification
                 .where(customerEmailEquals(customerEmail))
                 .and(productCodeEquals(productCode))
-                .and(productPrinceBetween(productMinPrice, productMaxPrice));
+                .and(productPriceBetween(productMinPrice, productMaxPrice));
 
         specification = orderById(specification);
 
         return this.purchaseRepository.findAll(specification);
+
     }
 
     private Specification<Purchase> customerEmailEquals(String customerEmail) {
@@ -43,8 +44,10 @@ public class PurchaseService {
         }
 
         return (root, query, builder) -> {
+
             Join<Purchase, Customer> join = root.join("customer", JoinType.INNER);
             return builder.equal(join.get("email"), customerEmail);
+
         };
 
     }
@@ -62,7 +65,7 @@ public class PurchaseService {
 
     }
 
-    private Specification<Purchase> productPrinceBetween(Double productMinPrice, Double productMaxPrice) {
+    private Specification<Purchase> productPriceBetween(Double productMinPrice, Double productMaxPrice) {
 
         return (root, query, builder) -> {
             Join<Purchase, Product> join = root.join("product", JoinType.INNER);
