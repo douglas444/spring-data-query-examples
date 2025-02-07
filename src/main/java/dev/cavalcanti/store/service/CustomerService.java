@@ -15,8 +15,8 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public List<Customer> findCustomers(String email, String productCode) {
-        return this.customerRepository.findCustomersByActiveAndEmailOrPurchases_ProductCode(true, email, productCode);
+    public List<Customer> findByPurchasedProduct(String productCode) {
+        return this.customerRepository.findByActiveAndPurchasesProductCodeOrderByIdAsc(true, productCode);
     }
 
 }

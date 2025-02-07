@@ -15,8 +15,8 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> findProducts(Double min, Double max) {
-        return this.productRepository.findProducts(min, max);
+    public List<Product> find(Double min, Double max) {
+        return this.productRepository.find(min, max);
     }
 
 }

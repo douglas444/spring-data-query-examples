@@ -20,12 +20,12 @@ public class PurchaseController {
     }
 
     @GetMapping
-    public List<Purchase> findPurchases(@RequestParam(required = false) String customerEmail,
-                                        @RequestParam(required = false) String productCode,
-                                        @RequestParam(required = false) Double productMinPrice,
-                                        @RequestParam(required = false) Double productMaxPrice) {
+    public List<Purchase> find(@RequestParam(required = false) String customerEmail,
+                               @RequestParam(required = false) String productCode,
+                               @RequestParam(required = false) Double productMinPrice,
+                               @RequestParam(required = false) Double productMaxPrice) {
 
-        return this.purchaseService.findPurchases(
+        return this.purchaseService.find(
                 customerEmail,
                 productCode,
                 productMinPrice,

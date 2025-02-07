@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    List<Customer> findCustomersByActiveAndEmailOrPurchases_ProductCode(boolean active, String email, String productCode);
+    List<Customer> findByActiveAndPurchasesProductCodeOrderByIdAsc(boolean active, String productCode);
 
 }

@@ -1,17 +1,13 @@
 package dev.cavalcanti.store.entity;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
-public class Product {
+public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +17,7 @@ public class Product {
     private String code;
 
     @Column
-    private Double price;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    private List<Purchase> purchases;
+    private Integer quantity;
 
     public Long getId() {
         return id;
@@ -35,12 +27,8 @@ public class Product {
         return code;
     }
 
-    public List<Purchase> getPurchases() {
-        return purchases;
-    }
-
-    public Double getPrice() {
-        return price;
+    public Integer getQuantity() {
+        return quantity;
     }
 
 }

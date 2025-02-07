@@ -19,14 +19,6 @@ public class Purchase {
     @ManyToOne
     private Customer customer;
 
-    public Purchase() {
-    }
-
-    public Purchase(Product product, Customer customer) {
-        this.product = product;
-        this.customer = customer;
-    }
-
     public Long getId() {
         return id;
     }

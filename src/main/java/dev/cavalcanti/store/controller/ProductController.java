@@ -20,9 +20,9 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> findProductsWithPriceInRange(@RequestParam(required = false) Double minPrice,
-                                                      @RequestParam(required = false) Double maxPrice) {
-        return this.productService.findProducts(minPrice, maxPrice);
+    public List<Product> find(@RequestParam(required = false) Double minPrice,
+                              @RequestParam(required = false) Double maxPrice) {
+        return this.productService.find(minPrice, maxPrice);
     }
 
 }

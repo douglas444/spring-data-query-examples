@@ -17,7 +17,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @JsonIgnore
@@ -25,14 +25,6 @@ public class Customer {
     private List<Purchase> purchases;
 
     private boolean active;
-
-    public Customer() {
-    }
-
-    public Customer(String email, boolean active) {
-        this.email = email;
-        this.active = active;
-    }
 
     public Long getId() {
         return id;

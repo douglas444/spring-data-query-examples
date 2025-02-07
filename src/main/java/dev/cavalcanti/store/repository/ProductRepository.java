@@ -11,8 +11,11 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = """
-    SELECT DISTINCT p.* FROM product p WHERE p.price BETWEEN COALESCE(:min, p.price) AND COALESCE(:max, p.price)
+        SELECT p.*
+        FROM product p
+        WHERE p.price BETWEEN COALESCE(:min, p.price) AND COALESCE(:max, p.price)
+        ORDER BY p.id ASC
     """, nativeQuery = true)
-    List<Product> findProducts(Double min, Double max);
+    List<Product> find(Double min, Double max);
 
 }

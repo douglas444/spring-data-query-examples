@@ -21,29 +21,26 @@ public class PurchaseService {
         this.purchaseRepository = purchaseRepository;
     }
 
-    public List<Purchase> findPurchases(String customerEmail,
-                                        String productCode,
-                                        Double productMinPrice,
-                                        Double productMaxPrice) {
+    public List<Purchase> find(String customerEmail,
+                               String productCode,
+                               Double productMinPrice,
+                               Double productMaxPrice) {
 
-        Specification<Purchase> specification = Specification.where(null);
+        Specification<Purchase> specification = Specification
+                .where(customerEmailEquals(customerEmail))
+                .and(productCodeEquals(productCode))
+                .and(productPrinceBetween(productMinPrice, productMaxPrice));
 
-        if (customerEmail != null && !customerEmail.isBlank()) {
-            specification = specification.and(customerEmailEquals(customerEmail));
-        }
-
-        if (productCode != null && !productCode.isBlank()) {
-            specification = specification.and(productCodeEquals(productCode));
-        }
-
-        if (productMinPrice != null || productMaxPrice != null) {
-            specification = specification.and(productPrinceBetween(productMinPrice, productMaxPrice));
-        }
+        specification = orderById(specification);
 
         return this.purchaseRepository.findAll(specification);
     }
 
     private Specification<Purchase> customerEmailEquals(String customerEmail) {
+
+        if (customerEmail == null || customerEmail.isBlank()) {
+            return Specification.where(null);
+        }
 
         return (root, query, builder) -> {
             Join<Purchase, Customer> join = root.join("customer", JoinType.INNER);
@@ -53,6 +50,10 @@ public class PurchaseService {
     }
 
     private Specification<Purchase> productCodeEquals(String productCode) {
+
+        if (productCode == null || productCode.isBlank()) {
+            return Specification.where(null);
+        }
 
         return (root, query, builder) -> {
             Join<Purchase, Product> join = root.join("product", JoinType.INNER);
@@ -70,6 +71,16 @@ public class PurchaseService {
                     price,
                     builder.coalesce(builder.literal(productMinPrice), price),
                     builder.coalesce(builder.literal(productMaxPrice), price));
+        };
+
+    }
+
+    private Specification<Purchase> orderById(Specification<Purchase> specification) {
+        return (root, query, builder) -> {
+            if (query != null) {
+                query.orderBy(builder.asc(root.get("id")));
+            }
+            return specification.toPredicate(root, query, builder);
         };
 
     }
