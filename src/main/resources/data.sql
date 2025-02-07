@@ -11,7 +11,7 @@ INSERT INTO purchase (id, customer_id, product_id) VALUES (200, 2, 20);
 INSERT INTO purchase (id, customer_id, product_id) VALUES (300, 3, 20);
 
 INSERT INTO stock (id, code, quantity) VALUES (1000, 'NINTENDO-SWITCH', 1245);
-INSERT INTO stock (id, code, quantity) VALUES (2000, 'PS5', 12);
+INSERT INTO stock (id, code, quantity) VALUES (2000, 'PS5', 0);
 INSERT INTO stock (id, code, quantity) VALUES (3000, 'XBOX-ONE', 19384);
 
 INSERT INTO rating (id, code, rating) VALUES (10000, 'NINTENDO-SWITCH', 4.7);
